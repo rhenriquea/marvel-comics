@@ -15,9 +15,28 @@ export default {
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/stylelint-module'],
 
+  css: ['~assets/styles.scss'],
+
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
+
+  plugins: ['~/plugins/line-clamp.client.js'],
+
+  axios: {
+    proxy: true,
+  },
+
+  proxy: {
+    debug: true,
+    '/v1/public/': 'https://gateway.marvel.com',
+  },
+
+  publicRuntimeConfig: {
+    MARVEL_PV_KEY: process.env.MARVEL_PV_KEY,
+    MARVEL_PB_KEY: process.env.MARVEL_PB_KEY,
+  },
 
   privateRuntimeConfig: {
     MARVEL_PV_KEY: process.env.MARVEL_PV_KEY,
+    MARVEL_PB_KEY: process.env.MARVEL_PB_KEY,
   },
 };

@@ -1,11 +1,17 @@
 <template>
-  <article class="event-card">
-    <div class="event-card__cover" :style="{ backgroundImage: `url(${imgPath})` }" />
-
-    {{ title }}
-
-    <p>{{ description }}</p>
-  </article>
+  <v-card>
+    <v-img
+      :src="imgPath"
+      class="white--text align-end"
+      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+      height="200px"
+    >
+      <v-card-title v-text="title"></v-card-title>
+    </v-img>
+    <v-card-subtitle>
+      <p>{{ description }}</p>
+    </v-card-subtitle>
+  </v-card>
 </template>
 
 <script>

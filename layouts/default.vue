@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-app>
     <Header />
-    <main class="container bg-white">
+    <v-main class="container bg-white">
       <nuxt />
-    </main>
+    </v-main>
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>

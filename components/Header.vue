@@ -1,16 +1,6 @@
 <template>
   <header>
-    <div>
-      <h1 class="container">Marvel Characters</h1>
-      <nav>
-        <ul class="container">
-          <li v-for="(page, i) in pages">
-            {{ page }}
-            <span v-if="i < pages.length - 1"> > </span>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <h1 class="container">Marvel Characters</h1>
   </header>
 </template>
 

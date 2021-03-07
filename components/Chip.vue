@@ -1,8 +1,8 @@
 <template>
-  <div class="chip">
+  <v-chip class="ma-2 chip">
     <span>{{ title }}</span>
-    <span>{{ formatCount(count) }}</span>
-  </div>
+    <v-avatar class="chip--count" right> {{ formatCount(count) }}</v-avatar>
+  </v-chip>
 </template>
 
 <script>
@@ -36,33 +36,15 @@ export default {
 
 <style lang="scss" scoped>
 .chip {
-  align-items: center;
-  background: #de3a3a;
-  border-radius: 15px;
+  background: #de3a3a !important;
   color: #fff;
-  display: flex;
   font-size: 12px;
-  height: 32px;
-  margin-right: 10px;
-  margin-top: 5px;
-  padding: 0 10px;
 
-  &:last-child {
-    margin-left: 0;
-  }
-
-  span {
-    &:first-child {
-      font-weight: 100;
-    }
-    &:last-child {
-      background-color: #a20808;
-      border-radius: 50%;
-      font-size: 10px;
-      font-weight: bold;
-      margin-left: 5px;
-      padding: 5px;
-    }
+  &--count {
+    background-color: #a20808;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 15px;
   }
 }
 </style>

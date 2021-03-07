@@ -10,16 +10,40 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
+        rel: 'stylesheet',
+      },
+      {
+        href: 'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css',
+        rel: 'stylesheet',
+      },
+      { href: 'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css', rel: 'stylesheet' },
+    ],
   },
 
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/stylelint-module'],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/stylelint-module', '@nuxtjs/vuetify'],
+
+  vuetify: {
+    theme: {
+      themes: {
+        light: {
+          primary: '#de3a3a',
+          secondary: '#b0bec5',
+          accent: '#8c9eff',
+          error: '#b71c1c',
+        },
+      },
+    },
+  },
 
   css: ['~assets/styles.scss'],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
+  plugins: ['~/plugins/line-clamp.client.js', '~/plugins/axios.js'],
 
-  plugins: ['~/plugins/line-clamp.client.js'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
 
   axios: {
     proxy: true,

@@ -1,32 +1,36 @@
 <template>
-  <NuxtLink custom v-slot="{ navigate }" :to="`/details/${id}`">
-    <article class="character-card" @click="navigate" role="link">
-      <div class="character-card__thumbnail" :style="{ backgroundImage: `url(${imgPath})` }" />
+  <v-card class="character-card">
+    <v-img :src="imgPath" :alt="name" />
+    <v-card-title v-line-clamp:5="1">{{ name }}</v-card-title>
 
-      <div class="character-card__content">
-        <h1 class="character-card__title">{{ name }}</h1>
+    <v-card-text class="character-card__content">
+      <template v-if="description">
+        <p v-line-clamp:20="5">
+          {{ description }}
+        </p>
+      </template>
+      <template v-else>
+        <p>No description available.</p>
+      </template>
+    </v-card-text>
 
-        <div class="character-card__count">
-          <chip title="Comics" :count="comics" />
-          <chip title="Events" :count="events" />
-          <chip title="Series" :count="series" />
-          <chip title="Stories" :count="stories" />
-        </div>
+    <v-divider class="mx-4"></v-divider>
 
-        <div class="character-card__description">
-          <strong>Description:</strong>
-          <template v-if="description">
-            <p v-line-clamp:20="5">
-              {{ description }}
-            </p>
-          </template>
-          <template v-else>
-            <p>No description available.</p>
-          </template>
-        </div>
-      </div>
-    </article>
-  </NuxtLink>
+    <v-card-text>
+      <v-chip-group column>
+        <chip title="Comics" :count="comics" />
+        <chip title="Events" :count="events" />
+        <chip title="Series" :count="series" />
+        <chip title="Stories" :count="stories" />
+      </v-chip-group>
+    </v-card-text>
+
+    <v-card-actions>
+      <NuxtLink custom v-slot="{ navigate }" :to="`/details/${id}`">
+        <v-btn color="primary" @click="navigate" text role="link">Learn More</v-btn>
+      </NuxtLink>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -78,46 +82,14 @@ export default {
 
 <style lang="scss" scoped>
 .character-card {
-  background-color: #fff;
-  border: 1px solid #cecece;
-  border-radius: 5px;
-  box-shadow: 1px 3px 6px #dadada;
-  cursor: pointer;
-  display: flex;
-  padding: 5px;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &__thumbnail {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
-    margin: 15px;
-    max-height: 80px;
-    min-width: 80px;
-  }
-
-  &__title {
-    margin: 15px 0 5px;
-  }
-
-  &__description {
-    height: 100px;
-    margin-bottom: 10px;
-    p {
-      font-size: 14px;
-      margin: 0;
-    }
-  }
-
   &__count {
     display: flex;
 
     flex-wrap: wrap;
     margin-bottom: 15px;
+  }
+  &__content {
+    height: 120px;
   }
 }
 </style>

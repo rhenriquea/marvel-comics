@@ -7,26 +7,8 @@ body {
   padding: 0;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 1024px;
-}
-
 .bg-white {
   background-color: #fff;
-}
-
-input {
-  border: 1px solid #cecece;
-  border-radius: 5px;
-  font-size: 1em;
-  line-height: 1em;
-  padding: 5px;
 }
 
 ul {
@@ -36,7 +18,7 @@ ul {
 
 .grid {
   display: grid;
-  grid-gap: 5px;
+  grid-gap: 15px;
 
   grid-template-columns: 1fr;
   grid-template-rows: auto;
@@ -46,7 +28,16 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* @media (min-width: 60em) {
+  @media (min-width: 60em) {
     grid-template-columns: repeat(4, 1fr);
-  } */
+  }
+
+  @media (min-width: 100em) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.loading {
+  margin-bottom: 15px;
+  text-align: center;
 }

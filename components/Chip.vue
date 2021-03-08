@@ -1,5 +1,5 @@
 <template>
-  <v-chip class="ma-2 chip">
+  <v-chip class="ma-2 chip white--text">
     <span>{{ title }}</span>
     <v-avatar class="chip--count" right> {{ formatCount(count) }}</v-avatar>
   </v-chip>

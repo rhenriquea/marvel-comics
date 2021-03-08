@@ -1,15 +1,21 @@
 <template>
-  <div class="character-details">
-    <img class="character-details__image" :src="imgPath" :alt="name" />
+  <div class="character-details d-flex flex-column flex-sm-row">
+    <img class="character-details__image mb-5" :src="imgPath" :alt="name" />
 
-    <div class="character-details__content">
+    <div class="character-details__content px-sm-5">
       <h1 class="display-1">{{ name }}</h1>
 
       <p>{{ description }}</p>
 
-      <NuxtLink custom v-slot="{ navigate }" :to="`/details/${id}/comics`">
-        <v-btn color="primary" raised @click="navigate" role="link">Comics</v-btn>
-      </NuxtLink>
+      <v-btn
+        class="d-flex d-sm-inline-flex"
+        :href="`/details/${id}/comics`"
+        nuxt
+        color="primary"
+        raised
+        role="link"
+        >Comics</v-btn
+      >
     </div>
   </div>
 </template>
@@ -43,12 +49,5 @@ export default {
 <style lang="scss" scoped>
 .md-button {
   margin: 0;
-}
-.character-details {
-  display: flex;
-
-  &__content {
-    padding: 15px;
-  }
 }
 </style>

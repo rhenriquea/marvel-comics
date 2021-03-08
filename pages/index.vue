@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="search">
+    <section class="search d-flex flex-column mb-5 flex-sm-row mr-sm-12 align-sm-baseline">
       <v-text-field
         v-model="search"
         @click:clear="clearSearch"
@@ -9,12 +9,10 @@
         type="text"
         @keydown.enter="searchByName"
       >
-        <template v-slot:append-outer>
-          <v-btn raised color="primary" @click="searchByName">
-            <v-icon left> mdi-account-search </v-icon>Search
-          </v-btn>
-        </template>
       </v-text-field>
+      <v-btn raised color="primary" class="ml-sm-5" @click="searchByName">
+        <v-icon left> mdi-account-search </v-icon>Search
+      </v-btn>
     </section>
     <section>
       <div class="loading" v-if="loading">
@@ -116,20 +114,8 @@ export default {
   padding: 15px;
 }
 
-section {
-  &.search {
-    margin: 0 auto;
-    max-width: 500px;
-    padding: 15px;
-
-    h2 {
-      margin-right: 5px;
-    }
-
-    label {
-      width: 100%;
-    }
-  }
+.search {
+  max-width: 600px;
 }
 
 .loading {

@@ -1,5 +1,5 @@
 <template>
-  <div class="details-page">
+  <div class="details-page px-5">
     <v-btn href="/" text nuxt color="accent" class="my-2" role="link"> &larr; Back</v-btn>
 
     <section>
@@ -13,7 +13,7 @@
 
     <section v-if="events.length > 0">
       <h2 class="display-1 mx-0">Events</h2>
-      <v-spacer></v-spacer>
+      <v-divider class="mb-5"></v-divider>
       <v-row>
         <v-col xs="12" sm="3" v-for="event of events" :key="event.id">
           <event-card

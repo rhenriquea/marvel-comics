@@ -1,8 +1,7 @@
 <template>
   <div class="details-page">
-    <NuxtLink custom v-slot="{ navigate }" to="/">
-      <v-btn color="accent" class="my-2" @click="navigate" role="link"> &larr; Back</v-btn>
-    </NuxtLink>
+    <v-btn href="/" text nuxt color="accent" class="my-2" role="link"> &larr; Back</v-btn>
+
     <section>
       <character-details
         :id="character.id"
@@ -15,15 +14,15 @@
     <section v-if="events.length > 0">
       <h2 class="display-1 mx-0">Events</h2>
       <v-spacer></v-spacer>
-      <div class="grid">
-        <event-card
-          v-for="event of events"
-          :key="event.id"
-          :title="event.title"
-          :description="event.description"
-          :img-path="`${event.thumbnail.path}/standard_fantastic.${event.thumbnail.extension}`"
-        />
-      </div>
+      <v-row>
+        <v-col xs="12" sm="3" v-for="event of events" :key="event.id">
+          <event-card
+            :title="event.title"
+            :description="event.description"
+            :img-path="`${event.thumbnail.path}/standard_fantastic.${event.thumbnail.extension}`"
+          />
+        </v-col>
+      </v-row>
     </section>
   </div>
 </template>
@@ -32,6 +31,7 @@
 import MarvelService from '@/services/MarvelService';
 import CharacterDetails from '@/components/CharacterDetails';
 import EventCard from '@/components/EventCard';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -46,6 +46,9 @@ export default {
       `/characters/${params.id}`
     );
     return { character: characterData.results[0], events: eventsData.results, params };
+  },
+  computed: {
+    ...mapGetters(['loading']),
   },
 };
 </script>

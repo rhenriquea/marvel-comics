@@ -1,11 +1,23 @@
 <template>
   <div>
-    <NuxtLink custom v-slot="{ navigate }" :to="`/details/${params.id}`">
-      <v-btn color="primary" class="my-2" @click="navigate" role="link"> &larr; Back</v-btn>
-    </NuxtLink>
-    <h2>Comics</h2>
-    <ul>
-      <li v-for="comic of comics">
+    <v-btn
+      :href="`/details/${params.id}`"
+      :loading="loading"
+      nuxt
+      text
+      color="accent"
+      class="my-2"
+      role="link"
+    >
+      &larr; Back</v-btn
+    >
+
+    <v-divider></v-divider>
+
+    <h2 class="display-1 font-weight-bold">Comics</h2>
+
+    <v-row>
+      <v-col xs="12" sm="4" v-for="comic of comics" :key="comic.id">
         <comic-details
           :title="comic.title"
           :description="comic.description"
@@ -15,14 +27,15 @@
           :characters="comic.characters.items"
           :creators="comic.creators.items"
         />
-      </li>
-    </ul>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import MarvelService from '@/services/MarvelService';
 import ComicDetails from '@/components/ComicDetails';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -34,6 +47,9 @@ export default {
     );
     const { results } = data;
     return { comics: results, params };
+  },
+  computed: {
+    ...mapGetters(['loading']),
   },
 };
 </script>

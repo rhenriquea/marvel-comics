@@ -7,6 +7,7 @@
         clearable
         label="Search character by name"
         type="text"
+        @keydown.enter="searchByName"
       >
         <template v-slot:append-outer>
           <v-btn raised color="primary" @click="searchByName">
@@ -19,24 +20,24 @@
       <div class="loading" v-if="loading">
         <v-progress-circular :size="70" :width="7" indeterminate></v-progress-circular>
       </div>
-      <div class="grid" v-if="characters && characters.length && !loading">
-        <character-card
-          v-for="character of characters"
-          :key="character.id"
-          :id="character.id"
-          :name="character.name"
-          :description="character.description"
-          :img-path="`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`"
-          :comics="character.comics.available"
-          :events="character.events.available"
-          :series="character.series.available"
-          :stories="character.stories.available"
-        />
-      </div>
+      <v-row v-if="characters && characters.length && !loading">
+        <v-col cols="12" xs="12" sm="4" md="3" v-for="character of characters" :key="character.id">
+          <character-card
+            :id="character.id"
+            :name="character.name"
+            :description="character.description"
+            :img-path="`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`"
+            :comics="character.comics.available"
+            :events="character.events.available"
+            :series="character.series.available"
+            :stories="character.stories.available"
+          />
+        </v-col>
+      </v-row>
       <div v-else-if="!loading && characters.length === 0" class="text-center">
         <p>No characters found.</p>
       </div>
-      <div>
+      <div class="d-flex flex-column align-center">
         <v-pagination
           circle
           v-model="page"

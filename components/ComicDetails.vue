@@ -1,136 +1,101 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="374">
+  <v-card :loading="loading" class="mx-auto my-12">
     <template slot="progress">
       <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
     </template>
 
     <v-img height="250" :src="imgPath"></v-img>
 
-    <v-card-title>{{ title }}</v-card-title>
+    <v-card-title v-line-clamp:20="1">{{ title }}</v-card-title>
 
     <v-card-text>
-      <v-row align="center" class="mx-0">
+      <v-row class="mb-1">
         <v-col>
-          <v-list dense>
-            <v-list-item two-line>
-              <v-list-item-content>
-                <v-list-item-title>Pages</v-list-item-title>
-                <v-list-item-subtitle>{{ pages }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item two-line v-for="price of prices">
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  price.type === 'printPrice' ? 'Print: ' : 'Digital: '
-                }}</v-list-item-title>
-                <v-list-item-subtitle>
-                  <v-chip class="ma-2 white--text" x-small color="green">
-                    ${{ price.price }}
-                  </v-chip></v-list-item-subtitle
-                >
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+          <div class="d-flex flex-column align-center">
+            <strong>Pages:</strong>
+            <v-chip v-if="pages > 0" class="white--text" small color="secondary">
+              {{ pages }}
+            </v-chip>
+            <v-chip v-else class="white--text" small color="secondary"> Unknown </v-chip>
+          </div>
         </v-col>
-        <v-col class="col-12 col-md-3">
-          <v-list dense>
-            <v-subheader>Creators</v-subheader>
-            <v-list-item two-line v-for="creator of creators" :key="creator.id">
-              <v-list-item-content>
-                <v-list-item-title>{{ creator.name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ creator.role }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+
+        <v-col>
+          <div class="d-flex flex-column align-center">
+            <strong>Print:</strong>
+            <v-chip v-if="prices[0]" class="white--text" small color="green">
+              ${{ prices[0].price }}
+            </v-chip>
+            <v-chip v-else color="red"> Unavailable </v-chip>
+          </div>
+        </v-col>
+
+        <v-col>
+          <div class="d-flex flex-column align-center">
+            <strong>Digital</strong>
+            <v-chip v-if="prices[1]" class="white--text" small color="green">
+              ${{ prices[1].price }}
+            </v-chip>
+            <v-chip v-else color="red" small class="white--text"> Unavailable </v-chip>
+          </div>
         </v-col>
       </v-row>
 
-      <div v-if="description">
-        <strong>Description</strong>
-        <p v-html="description"></p>
-      </div>
-    </v-card-text>
+      <v-divider class="mb-5"></v-divider>
 
-    <v-divider class="mx-4"></v-divider>
+      <v-expansion-panels>
+        <v-expansion-panel v-if="description">
+          <v-expansion-panel-header> Description </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <p v-html="description"></p>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-    <v-card-title>Characters</v-card-title>
-
-    <v-card-text>
-      <v-chip-group column>
-        <v-chip small label class="ma-2" v-for="character of characters" :key="character.id">
-          <span>{{ character.name }}</span>
-        </v-chip>
-      </v-chip-group>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn color="deep-purple lighten-2" text @click="reserve"> Reserve </v-btn>
-    </v-card-actions>
-  </v-card>
-  <!--   <v-card class="mb-4">
-    <v-card-title>{{ title }}</v-card-title>
-
-    <v-row class="justify-space-between">
-      <v-col class="col-12 col-md-3">
-        <div class="d-flex">
-          <v-img :src="imgPath" :alt="title" class="ml-4" />
-          <div class="ml-3">
+        <v-expansion-panel>
+          <v-expansion-panel-header> Creators </v-expansion-panel-header>
+          <v-expansion-panel-content>
             <v-list dense>
-              <v-list-item two-line>
+              <v-list-item two-line v-for="creator of creators.slice(0, 5)" :key="creator.id">
                 <v-list-item-content>
-                  <v-list-item-title>Pages</v-list-item-title>
-                  <v-list-item-subtitle>{{ pages }}</v-list-item-subtitle>
+                  <v-list-item-title>{{ creator.name }}</v-list-item-title>
+                  <v-list-item-subtitle class="text-capitalize">{{
+                    creator.role
+                  }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item two-line v-for="price of prices">
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    price.type === 'printPrice' ? 'Print: ' : 'Digital: '
-                  }}</v-list-item-title>
-                  <v-list-item-subtitle>
-                    <v-chip class="ma-2 white--text" x-small color="green">
-                      ${{ price.price }}
-                    </v-chip></v-list-item-subtitle
-                  >
-                </v-list-item-content>
-              </v-list-item>
+              <v-subheader v-if="creators.length > 5"
+                >{{ creators.length - 5 }} More...</v-subheader
+              >
             </v-list>
-          </div>
-        </div>
-      </v-col>
-      <v-col class="col-12 col-md-3">
-        <div>
-          <v-subheader>Characters</v-subheader>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-          <v-chip-group column>
-            <v-chip small label class="ma-2" v-for="character of characters" :key="character.id">
-              <span>{{ character.name }}</span>
-            </v-chip>
-          </v-chip-group>
-        </div>
-      </v-col>
-
-      <v-col class="col-12 col-md-3">
-        <v-list dense>
-          <v-subheader>Creators</v-subheader>
-          <v-list-item two-line v-for="creator of creators" :key="creator.id">
-            <v-list-item-content>
-              <v-list-item-title>{{ creator.name }}</v-list-item-title>
-              <v-list-item-subtitle>{{ creator.role }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-col>
-    </v-row>
-
-    <v-card-text v-if="description">
-      <strong>Description:</strong>
-      <p v-html="description"></p>
+        <v-expansion-panel>
+          <v-expansion-panel-header> Characters </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-chip-group column>
+              <v-chip
+                small
+                label
+                class="ma-2"
+                v-for="character of characters"
+                :key="character.id"
+                @click="getCharacterId(character.name)"
+              >
+                <span>{{ character.name }}</span>
+              </v-chip>
+            </v-chip-group>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-card-text>
-  </v-card> -->
+  </v-card>
 </template>
 
 <script>
+import MarvelService from '@/services/MarvelService';
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
     title: {
@@ -164,10 +129,29 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters(['loading']),
+  },
+  methods: {
+    async getCharacterId(name) {
+      const data = await new MarvelService(this.$axios, this.$config).fetchData(
+        '/characters',
+        `&nameStartsWith=${name}`
+      );
+
+      const characterId = data.results[0].id;
+      this.$router.push(`/details/${characterId}`);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.v-card__title {
+  height: 80px;
+  line-height: 50px;
+}
+
 ul,
 p {
   margin: 0 !important;

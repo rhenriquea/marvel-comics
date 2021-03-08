@@ -9,7 +9,7 @@
       <v-card-title v-text="title"></v-card-title>
     </v-img>
     <v-card-subtitle>
-      <p>{{ description }}</p>
+      <p v-line-clamp:20="5">{{ description }}</p>
     </v-card-subtitle>
   </v-card>
 </template>

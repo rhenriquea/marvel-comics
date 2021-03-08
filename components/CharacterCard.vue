@@ -1,7 +1,7 @@
 <template>
   <v-card class="character-card">
     <v-img :src="imgPath" :alt="name" />
-    <v-card-title v-line-clamp:5="1">{{ name }}</v-card-title>
+    <v-card-title class="text-truncate" v-line-clamp:5="1">{{ name }}</v-card-title>
 
     <v-card-text class="character-card__content">
       <template v-if="description">
@@ -26,9 +26,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <NuxtLink custom v-slot="{ navigate }" :to="`/details/${id}`">
-        <v-btn color="primary" @click="navigate" text role="link">Learn More</v-btn>
-      </NuxtLink>
+      <v-btn :href="`/details/${id}`" nuxt color="primary" text role="link">Learn More</v-btn>
     </v-card-actions>
   </v-card>
 </template>

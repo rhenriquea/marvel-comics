@@ -1,4 +1,6 @@
 export default {
+  target: 'server',
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -46,14 +48,15 @@ export default {
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
 
   axios: {
-    proxy: true,
+    //proxy: true,
+    baseURL: 'https://gateway.marvel.com',
   },
 
-  proxy: {
+  /*  proxy: {
     debug: true,
     '/v1/public/': 'https://gateway.marvel.com',
   },
-
+ */
   publicRuntimeConfig: {
     MARVEL_PV_KEY: process.env.MARVEL_PV_KEY,
     MARVEL_PB_KEY: process.env.MARVEL_PB_KEY,

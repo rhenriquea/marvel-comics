@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home px-5">
     <section class="search d-flex flex-column mb-5 flex-sm-row mr-sm-12 align-sm-baseline">
       <v-text-field
         v-model="search"
@@ -111,6 +111,7 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+  margin-top: 70px;
   padding: 15px;
 }
 

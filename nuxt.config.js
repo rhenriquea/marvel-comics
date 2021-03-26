@@ -19,8 +19,9 @@ export default {
 
   vuetify: {
     theme: {
+      dark: true,
       themes: {
-        light: {
+        dark: {
           primary: '#de3a3a',
           secondary: '#3f51b5',
           accent: '#8c9eff',

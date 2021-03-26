@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-5 comics-page">
     <v-btn
       :href="`/details/${params.id}`"
       :loading="loading"
@@ -17,7 +17,7 @@
     <h2 class="display-1 font-weight-bold">Comics</h2>
 
     <v-row>
-      <v-col xs="12" sm="4" v-for="comic of comics" :key="comic.id">
+      <v-col xs="12" sm="4" md="3" v-for="comic of comics" :key="comic.id">
         <comic-details
           :title="comic.title"
           :description="comic.description"
@@ -55,9 +55,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0 !important;
+.comics-page {
+  margin-top: 70px;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 !important;
+  }
 }
 </style>

@@ -13,30 +13,30 @@
         <v-col>
           <div class="d-flex flex-column align-center">
             <strong>Pages:</strong>
-            <v-chip v-if="pages > 0" class="white--text" small color="secondary">
+            <span v-if="pages > 0" class="info--text" small color="secondary">
               {{ pages }}
-            </v-chip>
-            <v-chip v-else class="white--text" small color="secondary"> Unknown </v-chip>
+            </span>
+            <span v-else class="red--text" small color="secondary"> Unknown </span>
           </div>
         </v-col>
 
         <v-col>
           <div class="d-flex flex-column align-center">
             <strong>Print:</strong>
-            <v-chip v-if="prices[0]" class="white--text" small color="green">
+            <span v-if="prices[0]" class="green--text" small color="green">
               ${{ prices[0].price }}
-            </v-chip>
-            <v-chip v-else color="red"> Unavailable </v-chip>
+            </span>
+            <span v-else class="red--text"> Unavailable </span>
           </div>
         </v-col>
 
         <v-col>
           <div class="d-flex flex-column align-center">
             <strong>Digital</strong>
-            <v-chip v-if="prices[1]" class="white--text" small color="green">
+            <span v-if="prices[1]" class="green--text" small color="green">
               ${{ prices[1].price }}
-            </v-chip>
-            <v-chip v-else color="red" small class="white--text"> Unavailable </v-chip>
+            </span>
+            <span v-else small class="red--text"> Unavailable </span>
           </div>
         </v-col>
       </v-row>

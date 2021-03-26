@@ -1,7 +1,11 @@
 <template>
   <footer>
     <span> Created by Rafael Almeida &copy;</span>
-    <span> Proudly using Nuxt.js</span>
+    <span
+      >More about the
+      <a href="https://developer.marvel.com/documentation/getting_started"> Marvel API </a
+      >here</span
+    >
   </footer>
 </template>
 
@@ -12,7 +16,6 @@ export default {};
 <style lang="scss" scoped>
 footer {
   align-items: center;
-  background: #cecece;
   display: flex;
   flex-direction: column;
   font-size: 12px;
